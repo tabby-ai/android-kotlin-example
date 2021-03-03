@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Tabby Demo</string>
+    <string name="retry">retry</string>
+    <string name="error_message">Something went wrong</string>
+    <string name="pay_later">pay later</string>
+    <string name="pay_in_installments">pay in installments</string>
+</resources>
