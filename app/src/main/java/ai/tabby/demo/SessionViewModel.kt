@@ -46,15 +46,15 @@ sealed class Event {
     object Loading : Event()
 }
 
-const val API_KEY = "" // ENTER YOUR KEY HERE
+const val API_KEY = "API_KEY_HERE" // ENTER YOUR KEY HERE
 private const val AUTH_TOKEN = "Bearer $API_KEY"
 
 private val SESSION_REQUEST_BODY = """
 {
   "lang": "en",
-  "merchant_code": "default",
+  "merchant_code": "ae",
   "payment": {
-    "amount": 1000,
+    "amount": 340,
     "buyer": {
       "dob": "1987-10-20",
       "email": "successful.payment@tabby.ai",

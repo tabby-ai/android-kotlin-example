@@ -66,26 +66,11 @@ class CheckoutFragment : Fragment() {
         webview.settings.allowFileAccess = true
         webview.settings.domStorageEnabled = true
 
-        webview.addJavascriptInterface(TabbyAppListener(), "tabbyAppListener")
+        webview.addJavascriptInterface(TabbyAppListener(), "tabbyMobileSDK")
 
         webview.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-
-                val javascript = """
-                var launchTabby = true;
-                Tabby.onChange = function(data) {
-                    tabbyAppListener.postMessage(data.payment.status);
-                    if (data.status === 'created' && launchTabby) {
-                        Tabby.launch({product: '$product'});
-                        launchTabby = false;
-                    }
-                };
-                Tabby.onClose = function() {
-                    tabbyAppListener.postMessage('close');
-                };
-                """
-                webview.evaluateJavascript(javascript) {}
             }
         }
 
@@ -194,13 +179,16 @@ class CheckoutFragment : Fragment() {
         fun postMessage(msg: String) {
             when(msg) {
                 "authorized" -> {
+                    print("authorized !!!")
                     // PAYMENT IS AUTHORIZED, SAVE ORDER, etc.
                     Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
                 }
                 "rejected" -> {
+                    print("rejected !!!")
                     Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
                 }
                 "close" -> {
+                    print("close !!!")
                     parentFragmentManager.popBackStack()
                     Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
                 }
